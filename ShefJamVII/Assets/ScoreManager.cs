@@ -16,13 +16,13 @@ public class ScoreManager : MonoBehaviour
 
 
     void updateScoreTime(){
-    	Debug.Log(pauseMenu.paused);
+    	//Debug.Log(pauseMenu.paused);
     	if (!pauseMenu.paused)
     		score += 10;
     }
 
     void updateScore(int i){
-    	Debug.Log(pauseMenu.paused);
+    	//Debug.Log(pauseMenu.paused);
     	if (!pauseMenu.paused)
     		score += i;
     }

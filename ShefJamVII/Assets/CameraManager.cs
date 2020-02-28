@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
+	public GameObject eventSystem;
 	private MenuManager menuManager;
 	private Vector3 offset;
 	
@@ -26,16 +27,16 @@ public class CameraManager : MonoBehaviour
 	public float CAM_SENS = 0.25f;	// Mouse Sensitivity
 
 	[Range(0, 10f)]
-	public float upDistance = 1.0f;
+	public float upDistance = 2.5f;
 
 	//private Vector3 lastMouse = new Vector3(255,255,255); 	// Middle(ish) of screen rather than top corner
 
     // Start is called before the first frame update
     void Start()
     {
-    	menuManager = GetComponentInParent<MovementManager>().eventSystem.GetComponent<MenuManager>();
+    	menuManager = eventSystem.GetComponent<MenuManager>();
     	offset = new Vector3(player.position.x + camPosX, player.position.y + camPosY, player.position.z + camPosZ);
-        transform.rotation = Quaternion.Euler(camRotY, camRotY, camRotZ);
+       // transform.rotation = Quaternion.Euler(camRotY, camRotY, camRotZ);
     }
 
     // Update is called once per frame
@@ -43,9 +44,10 @@ public class CameraManager : MonoBehaviour
     {
     	if (!menuManager.paused)
     	{
-
     		offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * CAM_SENS, Vector3.up)* offset; //* Quaternion.AngleAxis(Input.GetAxis("Mouse Y") * CAM_SENS, Vector3.right) * offset;
-    		transform.position = player.transform.position + offset + new Vector3(0, upDistance, 0);
+    		Vector3 tempPos = transform.position;
+    		transform.position = player.transform.position - offset + new Vector3(0, upDistance, 0);
+    		
     		transform.LookAt(player.position);
     	}
    //  	lastMouse = Input.mousePosition - lastMouse;

@@ -64,6 +64,8 @@ public class MovementManager : MonoBehaviour
             else {
             	transform.Translate(p);
             }
+
+            transform.rotation = new Quaternion(0,0,0,0);
         }
     }
 
@@ -71,12 +73,7 @@ public class MovementManager : MonoBehaviour
     // --------------------------------------------------
     private Vector3 GetBaseInput() {
     	Vector3 p_Velocity = new Vector3();
-    	if (Input.GetKey(KeyCode.W)){
-    		p_Velocity += camForward;
-    	}
-    	if (Input.GetKey(KeyCode.S)) {
-    		p_Velocity += -camForward;
-    	}
+    	p_Velocity += camForward;
     	if (Input.GetKey(KeyCode.A)){
     		p_Velocity += -camRight;
     	}
