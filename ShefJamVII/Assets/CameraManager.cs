@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-
+	private MenuManager menuManager;
 	private Vector3 offset;
 	
 	public Transform player;
@@ -33,6 +33,7 @@ public class CameraManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    	menuManager = GetComponentInParent<MovementManager>().eventSystem.GetComponent<MenuManager>();
     	offset = new Vector3(player.position.x + camPosX, player.position.y + camPosY, player.position.z + camPosZ);
         transform.rotation = Quaternion.Euler(camRotY, camRotY, camRotZ);
     }
@@ -40,9 +41,13 @@ public class CameraManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    	offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * CAM_SENS, Vector3.up)* offset; //* Quaternion.AngleAxis(Input.GetAxis("Mouse Y") * CAM_SENS, Vector3.right) * offset;
-    	transform.position = player.transform.position + offset + new Vector3(0, upDistance, 0);
-    	transform.LookAt(player.position);
+    	if (!menuManager.paused)
+    	{
+
+    		offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * CAM_SENS, Vector3.up)* offset; //* Quaternion.AngleAxis(Input.GetAxis("Mouse Y") * CAM_SENS, Vector3.right) * offset;
+    		transform.position = player.transform.position + offset + new Vector3(0, upDistance, 0);
+    		transform.LookAt(player.position);
+    	}
    //  	lastMouse = Input.mousePosition - lastMouse;
        
 

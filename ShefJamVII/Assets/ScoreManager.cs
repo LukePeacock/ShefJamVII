@@ -4,21 +4,27 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
+	private MenuManager pauseMenu;
 	public float score = 0.0f;
     // Start is called before the first frame update
     void Start()
     {	
+    	pauseMenu = GetComponent<MenuManager>();
         score = 0.0f;
         InvokeRepeating("updateScoreTime", 0, 1.0f);
     }
 
 
     void updateScoreTime(){
-    	score += 10;
+    	Debug.Log(pauseMenu.paused);
+    	if (!pauseMenu.paused)
+    		score += 10;
     }
 
     void updateScore(int i){
-    	score += i;
+    	Debug.Log(pauseMenu.paused);
+    	if (!pauseMenu.paused)
+    		score += i;
     }
 
     void OnGUI(){

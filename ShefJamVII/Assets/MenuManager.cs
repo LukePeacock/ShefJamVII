@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    public static bool paused = false;
+    public bool paused = false;
     public GameObject controlMenuUI;
+    private float defaultTimeScale;
 
     void Start(){
         Debug.Log("Loading Menu");
+        controlMenuUI.SetActive(false);
+        defaultTimeScale = Time.timeScale;
     }
     
     // Update is called once per frame
@@ -16,9 +19,15 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)){
         	if (paused)
+        	{
         		Resume();
+        		Time.timeScale = defaultTimeScale;
+        	}	
         	else 
+        	{	
         		Pause();
+        		Time.timeScale = 0.0f;
+        	}
         }
     }
 

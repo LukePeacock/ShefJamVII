@@ -6,24 +6,25 @@ public class MovementManager : MonoBehaviour
 {
 	public float jumpHeight = 1.0f;
 	public GameObject camera;
-	//public GameObject pauseMenu;
-	float MAIN_SPEED = 10.0f;	// Regular speed
-	// float SHIFT_ADD = 50.0f;	// Shift speed multiplifer
-	// float MAX_SHIFT = 500.0f;	// Maximum speed with shift
 	
-	private float totalRun = 1.0f ;
+
+	public GameObject eventSystem;
+	private MenuManager menuManager;
+	float MAIN_SPEED = 10.0f;	// Regular speed
+	
+	
 	private Vector3 camForward;
 	private Vector3 camRight;
     // Start is called before the first frame update
     void Start()
     {
-        
+        menuManager = eventSystem.GetComponent<MenuManager>(); 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (true){//!MenuManager.paused) {
+        if (!menuManager.paused) {
 
         
 
@@ -48,7 +49,7 @@ public class MovementManager : MonoBehaviour
             // 	p.z = Mathf.Clamp(p.z, -MAX_SHIFT, MAX_SHIFT);
             // }
             // else{
-            	totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
+            	//totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
             	p = p * MAIN_SPEED;
             // }
 
