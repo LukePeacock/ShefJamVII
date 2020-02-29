@@ -11,7 +11,26 @@ public class PlaceObjects : MonoBehaviour {
     public void Place() {
         int numObjects = Random.Range(TerrainController.MinObjectsPerTile, TerrainController.MaxObjectsPerTile);
         for (int i = 0; i < numObjects; i++) {
-            int prefabType = Random.Range(0, TerrainController.PlaceableObjects.Length);
+            int totalChance = 0;
+            foreach(int val in TerrainController.PlaceableObjectsChance){totalChance += val;};
+            float[] chances = new float[TerrainController.PlaceableObjectsChance.Length];
+            for(int j= 0; j < chances.Length; j++)
+            {
+              chances[j] = TerrainController.PlaceableObjectsChance[j];
+            };
+            //Debug.Log(totalChance + "TT");
+            float prefabTypeVal = Random.Range(0, totalChance);
+          //  Debug.Log(prefabTypeVal);
+            int prefabType = 3;
+            switch (prefabTypeVal)
+            {
+              case float n when (chances[0] >= n): prefabType = 0; break;
+              case float n when (chances[1] >= n  && n> chances[0]): prefabType = 1; break;
+              case float n when (chances[2] >= n && n > chances[1]): prefabType = 2; break;
+              case float n when (chances[3] >= n && n > chances[2]): prefabType = 3; break;
+            };
+
+            //int prefabType = Random.Range(0, TerrainController.PlaceableObjects.Length);
             Vector3 startPoint = RandomPointAboveTerrain();
 
             RaycastHit hit;

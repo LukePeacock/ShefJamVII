@@ -49,7 +49,7 @@ public class ScoreManager : MonoBehaviour
 			oil = 1000;
 		}
 
-		void resetGame(){
+		public void resetGame(){
 			score = 0;
 			resetOil();
 			player.transform.position = new Vector3(3,3,3);
@@ -62,7 +62,7 @@ public class ScoreManager : MonoBehaviour
 			gameOverScreen.SetActive(false);
 			Time.timeScale = defaultTimeScale;
 			cameraManager.resetCamera();
-			InvokeRepeating("updateScoreTime", 0, 1.0f);
+			InvokeRepeating("updateScoreTime", 0, 0.4f);
 		}
 
     void Update(){
@@ -74,6 +74,31 @@ public class ScoreManager : MonoBehaviour
 	    	{
 					endGame();
 	    	}
+				TerrainController tc = GetComponent<TerrainController>();
+				int difficulty = 1;
+				if (score > 100)
+					difficulty = (score / 20) * 2 ;
+
+					Debug.Log(difficulty);
+
+				float t = difficulty / 25.0f;
+				tc.PlaceableObjectsChance[0] = Mathf.Lerp(25.0f, 10.0f, t);// tc.PlaceableObjectsChance[0] - (1/(difficulty));
+
+				t = difficulty / 300.0f;
+				tc.PlaceableObjectsChance[1] = Mathf.Lerp(20.0f, 300.0f, t);//tc.PlaceableObjectsChance[1] + (1/(difficulty/2));
+
+				t = difficulty / 80.0f;
+				tc.PlaceableObjectsChance[2] = Mathf.Lerp(80.0f, 20.0f, t);//tc.PlaceableObjectsChance[2] + (1/(difficulty/3));
+
+				tc.PlaceableObjectsChance[3] = Mathf.Lerp(80.0f, 20.0f, t);//tc.PlaceableObjectsChance[3] + (1/(difficulty/3));
+				// Mathf.Clamp(tc.PlaceableObjectsChance[0], 10.0f, 25.0f);
+				// Mathf.Clamp(tc.PlaceableObjectsChance[1], 10.0f, 1000.0f);
+				// Mathf.Clamp(tc.PlaceableObjectsChance[2], 10.0f, 200.0f);
+				// Mathf.Clamp(tc.PlaceableObjectsChance[3], 10.0f, 200.0f);
+
+				t = difficulty / 30.0f;
+				tc.maxObjectsPerTile = (int)Mathf.Lerp(5, 30,t);
+				// Skybox stuff
 	    }
 	    if (gameOver &&Input.GetKeyDown(KeyCode.Return))
 					resetGame();
@@ -86,7 +111,7 @@ public class ScoreManager : MonoBehaviour
 			//Debug.Log(player.GetComponent<Animator>().GetBool("Death"));
 			if (!gameOver && !player.GetComponent<Animator>().GetBool("Death"))
 			{
-			
+
 				player.GetComponent<Animator>().SetBool("Death", true);
 				Debug.Log("DIE!");
 			}
@@ -108,7 +133,7 @@ public class ScoreManager : MonoBehaviour
     void updateScoreTime(){
     	//Debug.Log(pauseMenu.paused);
     	if (!pauseMenu.paused && !gameOver)
-    		updateScore(100);
+    		updateScore(10);
     }
 
     void updateScore(int i){
@@ -116,7 +141,7 @@ public class ScoreManager : MonoBehaviour
     	if (!pauseMenu.paused && !gameOver)
     		score += i;
     		if (countries.ContainsKey(score))
-    			country = countries[score/100];
+    			country = countries[score];
 
     }
 
