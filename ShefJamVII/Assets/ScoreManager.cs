@@ -11,7 +11,7 @@ public class ScoreManager : MonoBehaviour
 	public GameObject finalCountryLabel;
 	public bool gameOver = false;
 	public int score = 0;
-	private int oil = 10000;
+	public int oil = 10000;
 	private Dictionary<int, string> countries = new Dictionary<int, string>(){
 				{280, "Poland"},
 				{290, "France"},
