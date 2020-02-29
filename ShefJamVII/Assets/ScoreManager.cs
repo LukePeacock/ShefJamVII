@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
+	public GameObject player;
 	private MenuManager pauseMenu;
 	public GameObject gameOverScreen;
 	public GameObject finalScoreLabel;
 	public GameObject finalCountryLabel;
+	public GameObject camera;
+	private CameraManager cameraManager;
 	public bool gameOver = false;
 	public int score = 0;
 	public int oil = 10000;
@@ -33,30 +36,48 @@ public class ScoreManager : MonoBehaviour
 				{9040, "China"}
 												};		//http://worldpopulationreview.com/countries/pollution-by-country/
 	private string country = "Most People";
+	private float defaultTimeScale;
     // Start is called before the first frame update
     void Start()
-    {	
-    	pauseMenu = GetComponent<MenuManager>();
-        score = 0;
-        InvokeRepeating("updateScoreTime", 0, 1.0f);
+    {
+				cameraManager = camera.GetComponent<CameraManager>();
+    		pauseMenu = GetComponent<MenuManager>();
+				defaultTimeScale = Time.timeScale;
+				resetGame();
     }
+
+		void resetGame(){
+			score = 0;
+			oil = 10000;
+			player.transform.position = new Vector3(3,1,3);
+			player.transform.rotation = new Quaternion(0,0,0,0);
+			gameOver = false;
+			gameOverScreen.SetActive(false);
+			Time.timeScale = defaultTimeScale;
+			cameraManager.resetCamera();
+			InvokeRepeating("updateScoreTime", 0, 1.0f);
+		}
 
     void Update(){
     	if (!pauseMenu.paused)
     	{
 	    	if (oil > 1)
 	    		oil -= 1;
-	    	else 
+	    	else
 	    	{
-	    		gameOver = true;
+					endGame();
 	    	}
 	    }
-	    if (gameOver){
-	    	oil = 0;
-	    	CancelInvoke();
-	    	finalScore();
-	    }
+	    if (gameOver &&Input.GetKeyDown(KeyCode.Return))
+					resetGame();
     }
+
+		public void endGame(){
+			gameOver = true;
+			oil = 0;
+			CancelInvoke();
+			finalScore();
+		}
 
     void updateScoreTime(){
     	//Debug.Log(pauseMenu.paused);
@@ -70,7 +91,7 @@ public class ScoreManager : MonoBehaviour
     		score += i;
     		if (countries.ContainsKey(score))
     			country = countries[score];
-    	
+
     }
 
     private void finalScore(){
@@ -83,14 +104,14 @@ public class ScoreManager : MonoBehaviour
     void OnGUI(){
   		if(!gameOver) {
 	    	GUI.BeginGroup (new Rect(5, 5, 300.0f, 50));
-			GUI.Box (new Rect (0, 0, 200.0f, 20.0f), "Score: " + score);
-			GUI.Box (new Rect (0, 30, 300.0f, 20.0f), "You're More Polluting Than: " + country);
-			GUI.EndGroup ();
+				GUI.Box (new Rect (0, 0, 200.0f, 20.0f), "Score: " + score);
+				GUI.Box (new Rect (0, 30, 300.0f, 20.0f), "You're More Polluting Than: " + country);
+				GUI.EndGroup ();
 
-			GUI.BeginGroup (new Rect(Screen.width-205, 5, 300.0f, 50.0f));
-			GUI.Box(new Rect(0 ,0, 200.0f, 20.0f), "Remaining Oil: " + (oil/100.0f));
-			GUI.EndGroup();
-		}
+				GUI.BeginGroup (new Rect(Screen.width-205, 5, 300.0f, 50.0f));
+				GUI.Box(new Rect(0 ,0, 200.0f, 20.0f), "Remaining Oil: " + (oil/100.0f));
+				GUI.EndGroup();
+			}
     }
 
 

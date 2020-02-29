@@ -30,7 +30,7 @@ public class CameraManager : MonoBehaviour
 	public float upDistance = 2.5f;
 
 	private Vector3 lastMouse = new Vector3(255,255,255); 	// Middle(ish) of screen rather than top corner
-
+	private Vector3 origOffset;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,9 +38,14 @@ public class CameraManager : MonoBehaviour
     	menuManager = eventSystem.GetComponent<MenuManager>();
     	scoreManager = eventSystem.GetComponent<ScoreManager>();
 			// Get initial offset vector
-    	offset = new Vector3(player.position.x + camPosX, player.position.y + camPosY, player.position.z + camPosZ);
-
+    	origOffset = new Vector3(player.position.x + camPosX, player.position.y + camPosY, player.position.z + camPosZ);
+			resetCamera();
     }
+
+		public void resetCamera(){
+			lastMouse = Input.mousePosition;
+			offset = origOffset;
+		}
 
     // Update is called once per frame
     void Update()
