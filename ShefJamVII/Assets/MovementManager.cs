@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovementManager : MonoBehaviour
 {
-	public float jumpHeight = 1.0f;
+	public float jumpHeight = 0.5f;
 	public GameObject camera;
 
 
