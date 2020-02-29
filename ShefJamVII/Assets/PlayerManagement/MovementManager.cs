@@ -44,7 +44,8 @@ public class MovementManager : MonoBehaviour
 					transform.rotation = Quaternion.Euler(0.0f, camera.transform.eulerAngles.y, 0.0f);
 
 					// Get user input
-          Vector3 p = GetBaseInput();
+					bool isDead = GetComponent<Animator>().GetBool("Death");
+          Vector3 p = GetBaseInput(isDead);
 
 					// Apply main speed and delta time to counter frame rate changes
 					p = p * MAIN_SPEED * Time.deltaTime * speedPenalty;
@@ -57,8 +58,11 @@ public class MovementManager : MonoBehaviour
     // Return basic values. If no input present, return just forward move
 		// @return: vector3 p - direction(s) to move in stored as vector3
     // --------------------------------------------------
-    private Vector3 GetBaseInput() {
+    private Vector3 GetBaseInput(bool isDead) {
+			Debug.Log(isDead);
     	Vector3 p_Velocity = new Vector3();
+			if (isDead)
+				return p_Velocity;
 
 			// Constant move forwards
     	p_Velocity += camForward;//transform.forward;

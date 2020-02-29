@@ -53,8 +53,11 @@ public class ScoreManager : MonoBehaviour
 			score = 0;
 			resetOil();
 			player.transform.position = new Vector3(3,3,3);
-
+			player.GetComponent<Animator>().SetBool("Death", false);
+			player.GetComponent<Animator>().SetBool("GameOver", false);
+			player.GetComponent<Animator>().SetBool("Playing", false);
 			player.transform.rotation = new Quaternion(0,0,0,0);
+			player.SetActive(true);
 			gameOver = false;
 			gameOverScreen.SetActive(false);
 			Time.timeScale = defaultTimeScale;
@@ -83,15 +86,17 @@ public class ScoreManager : MonoBehaviour
 			//Debug.Log(player.GetComponent<Animator>().GetBool("Death"));
 			if (!gameOver && !player.GetComponent<Animator>().GetBool("Death"))
 			{
+			
 				player.GetComponent<Animator>().SetBool("Death", true);
 				Debug.Log("DIE!");
 			}
 
-			// if (!AnimatorIsPlaying() && player.GetComponent<Animator>().GetBool("GameOver"))
-			// {
-			// 	finalScore();
-			// 	gameOver = true;
-			// }
+			if (player.GetComponent<Animator>().GetBool("GameOver"))
+			{
+				player.SetActive(false);
+				finalScore();
+				gameOver = true;
+			}
 
 
 			// if(player.GetComponent<Animation>().isPlaying)
