@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
 	private MenuManager pauseMenu;
+	public GameObject gameOverScreen;
+	public GameObject finalScoreLabel;
+	public GameObject finalCountryLabel;
+	private bool gameOver = false;
 	public int score = 0;
+	private int oil = 10000;
 	private Dictionary<int, string> countries = new Dictionary<int, string>(){
 				{280, "Poland"},
 				{290, "France"},
@@ -35,36 +41,50 @@ public class ScoreManager : MonoBehaviour
         InvokeRepeating("updateScoreTime", 0, 1.0f);
     }
 
+    void Update(){
+    	if (oil > 1)
+    		oil -= 1;
+    	else 
+    	{
+    		oil = 0;
+    		gameOver = true;
+    		CancelInvoke();
+    		finalScore();
+    	}
+    }
 
     void updateScoreTime(){
     	//Debug.Log(pauseMenu.paused);
-    	if (!pauseMenu.paused)
+    	if (!pauseMenu.paused && !gameOver)
     		updateScore(10);
     }
 
     void updateScore(int i){
     	//Debug.Log(pauseMenu.paused);
-    	if (!pauseMenu.paused)
+    	if (!pauseMenu.paused && !gameOver)
     		score += i;
     		if (countries.ContainsKey(score))
     			country = countries[score];
     	
     }
 
-    private string finalScore(){
-    	string s = "You're more polluting than: ";
-    	s += country;
-    	s += "\n\n";
-    	s += "You produced " + score + "million metric tons";
-    	return s;
+    private void finalScore(){
+    	finalCountryLabel.GetComponent<Text>().text = country;
+    	finalScoreLabel.GetComponent<Text>().text = "You Produced " + score + " million metric tons of pollution";
+    	gameOverScreen.SetActive(true);
     }
 
     void OnGUI(){
-  
-    	GUI.BeginGroup (new Rect(5, 5, 500.0f, 50));
-		GUI.Box (new Rect (0, 0, 200.0f, 20.0f), "Score: " + score);
-		GUI.Box (new Rect (0, 30, 300.0f, 20.0f), "You're More Polluting Than: " + country);
-		GUI.EndGroup ();
+  		if(!gameOver) {
+	    	GUI.BeginGroup (new Rect(5, 5, 500.0f, 50));
+			GUI.Box (new Rect (0, 0, 200.0f, 20.0f), "Score: " + score);
+			GUI.Box (new Rect (0, 30, 300.0f, 20.0f), "You're More Polluting Than: " + country);
+			GUI.EndGroup ();
+
+			GUI.BeginGroup (new Rect(Screen.width-300, 5, 300.0f, 50.0f));
+			GUI.Box(new Rect(0 ,0, 200.0f, 20.0f), "Remaining Oil: " + (oil/100.0f));
+			GUI.EndGroup();
+		}
     }
 
 
