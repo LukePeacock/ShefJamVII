@@ -190,7 +190,7 @@ MonoBehaviour:
   water: {fileID: 8108570464724026393, guid: e6d2314cd4a59304fa4e35d55b5b59e0, type: 3}
   seed: 0
   placeableObjects:
-  - {fileID: 3708859481655943808, guid: 9d49fc9df4b50ee419001236cdcba386, type: 3}
+  - {fileID: 8207961296906792249, guid: d3114e6a359aa704c8c04d89adef6a81, type: 3}
   - {fileID: 2863712710427570628, guid: 9efd445790d2d0d4587e37fbcf2c2357, type: 3}
   placeableObjectSizes:
   - {x: 1, y: 1, z: 1}
@@ -6262,14 +6262,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 722575611}
   player: {fileID: 916454688}
-  camPosX: 0
+  camPosX: 7
   camPosY: 0
   camPosZ: 0
   camRotX: 0
   camRotZ: 0
   camRotY: 0
   CAM_SENS: 5
-  upDistance: 2.5
+  upDistance: 3.27
 --- !u!1 &1062091331
 GameObject:
   m_ObjectHideFlags: 0
