@@ -6211,7 +6211,7 @@ MonoBehaviour:
   camRotZ: 0
   camRotY: 0
   CAM_SENS: 5
-  upDistance: 4
+  upDistance: 3.5
 --- !u!1 &1062091331
 GameObject:
   m_ObjectHideFlags: 0
