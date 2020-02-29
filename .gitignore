@@ -62,3 +62,6 @@ crashlytics-build.properties
 # OSX DS Store Files
 .DS_STORE
 
+# Procedural Assets
+*/[Aa]ssets/[pP]rocedural[Tt]oolkit
+
