@@ -34,6 +34,14 @@ public class MenuManager : MonoBehaviour
       Cursor.lockState = CursorLockMode.Locked;
     }
 
+    public void Reset(){
+      Time.timeScale = defaultTimeScale;
+    	paused = false;
+    	controlMenuUI.SetActive(false);
+      Cursor.lockState = CursorLockMode.Locked;
+    	GetComponent<ScoreManager>().resetGame();
+    }
+
     public void Pause() {
       Cursor.lockState = CursorLockMode.None;
     	Time.timeScale = 0.0f;

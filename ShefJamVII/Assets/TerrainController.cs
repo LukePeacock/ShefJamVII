@@ -29,10 +29,13 @@ public class TerrainController : MonoBehaviour {
     private GameObject[] placeableObjects;
     public GameObject[] PlaceableObjects { get { return placeableObjects; } }
     [SerializeField]
+    private float[] placeableObjectsChance;
+    public float[] PlaceableObjectsChance  {get { return placeableObjectsChance; }}
+    [SerializeField]
     private Vector3[] placeableObjectSizes;//the sizes of placeableObjects, in matching order
     public Vector3[] PlaceableObjectSizes { get { return placeableObjectSizes; } }
     [SerializeField]
-    private int minObjectsPerTile = 0, maxObjectsPerTile = 20;
+    public int minObjectsPerTile = 0, maxObjectsPerTile = 20;
     public int MinObjectsPerTile { get { return minObjectsPerTile; } }
     public int MaxObjectsPerTile { get { return maxObjectsPerTile; } }
     [SerializeField]

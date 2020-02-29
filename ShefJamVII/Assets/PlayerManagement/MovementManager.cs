@@ -59,7 +59,7 @@ public class MovementManager : MonoBehaviour
 		// @return: vector3 p - direction(s) to move in stored as vector3
     // --------------------------------------------------
     private Vector3 GetBaseInput(bool isDead) {
-			Debug.Log(isDead);
+			
     	Vector3 p_Velocity = new Vector3();
 			if (isDead)
 				return p_Velocity;
