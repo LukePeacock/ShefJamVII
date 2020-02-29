@@ -196,7 +196,7 @@ MonoBehaviour:
   - {x: 1, y: 1, z: 1}
   - {x: 1, y: 1, z: 1}
   minObjectsPerTile: 0
-  maxObjectsPerTile: 20
+  maxObjectsPerTile: 2
   destroyDistance: 1000
   usePerlinNoise: 1
   noise: {fileID: 0}
@@ -401,6 +401,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Plane
+      objectReference: {fileID: 0}
+    - target: {fileID: 8108570464724026389, guid: e6d2314cd4a59304fa4e35d55b5b59e0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Water
       objectReference: {fileID: 0}
     - target: {fileID: 8108570464724026393, guid: e6d2314cd4a59304fa4e35d55b5b59e0,
         type: 3}
