@@ -26,7 +26,7 @@ public class ScoreManager : MonoBehaviour
 				{5000, "United States"},
 				{9040, "China"}
 												};		//http://worldpopulationreview.com/countries/pollution-by-country/
-	private string country = "";
+	private string country = "Most People";
     // Start is called before the first frame update
     void Start()
     {	
