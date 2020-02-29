@@ -65,8 +65,8 @@ public class ScoreManager : MonoBehaviour
     void Update(){
     	if (!pauseMenu.paused)
     	{
-	    	if (oil > 1)
-	    		oil -= 1;
+	    	if (oil > 2)
+	    		oil -= 2;
 	    	else
 	    	{
 					endGame();
@@ -77,16 +77,33 @@ public class ScoreManager : MonoBehaviour
     }
 
 		public void endGame(){
-			gameOver = true;
+
 			oil = 0;
 			CancelInvoke();
-			finalScore();
+			//Debug.Log(player.GetComponent<Animator>().GetBool("Death"));
+			if (!gameOver && !player.GetComponent<Animator>().GetBool("Death"))
+			{
+				player.GetComponent<Animator>().SetBool("Death", true);
+				Debug.Log("DIE!");
+			}
+
+			// if (!AnimatorIsPlaying() && player.GetComponent<Animator>().GetBool("GameOver"))
+			// {
+			// 	finalScore();
+			// 	gameOver = true;
+			// }
+
+
+			// if(player.GetComponent<Animation>().isPlaying)
+			// 	Debug.Log("Playing");
+			// if (!player.GetComponent<Animation>().isPlaying)
+			// 	finalScore();
 		}
 
     void updateScoreTime(){
     	//Debug.Log(pauseMenu.paused);
     	if (!pauseMenu.paused && !gameOver)
-    		updateScore(10);
+    		updateScore(100);
     }
 
     void updateScore(int i){
@@ -94,7 +111,7 @@ public class ScoreManager : MonoBehaviour
     	if (!pauseMenu.paused && !gameOver)
     		score += i;
     		if (countries.ContainsKey(score))
-    			country = countries[score];
+    			country = countries[score/100];
 
     }
 
@@ -118,6 +135,11 @@ public class ScoreManager : MonoBehaviour
 			}
     }
 
+		bool AnimatorIsPlaying(){
+			Debug.Log("Playing");
+         return player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length >
+                player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
+    }
 
 
 }

@@ -12,7 +12,7 @@ public class MovementManager : MonoBehaviour
 	private MenuManager menuManager;
 	private ScoreManager scoreManager;
 	float MAIN_SPEED = 10.0f;	// Regular speed
-
+	public float speedPenalty = 1.0f;
 
 	private Vector3 camForward;
 	private Vector3 camRight;
@@ -47,7 +47,7 @@ public class MovementManager : MonoBehaviour
           Vector3 p = GetBaseInput();
 
 					// Apply main speed and delta time to counter frame rate changes
-					p = p * MAIN_SPEED * Time.deltaTime;
+					p = p * MAIN_SPEED * Time.deltaTime * speedPenalty;
 
 					// Translate
 					transform.position += p;
@@ -73,7 +73,7 @@ public class MovementManager : MonoBehaviour
     	}
 			// If space if pressed, add up amount
       if (Input.GetKey(KeyCode.Space)){
-      	p_Velocity += new Vector3(0,jumpHeight,0);
+      		p_Velocity += new Vector3(0,jumpHeight,0);
       }
 			return p_Velocity;
     }
