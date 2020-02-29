@@ -76,12 +76,12 @@ public class ScoreManager : MonoBehaviour
 
     void OnGUI(){
   		if(!gameOver) {
-	    	GUI.BeginGroup (new Rect(5, 5, 500.0f, 50));
+	    	GUI.BeginGroup (new Rect(5, 5, 300.0f, 50));
 			GUI.Box (new Rect (0, 0, 200.0f, 20.0f), "Score: " + score);
 			GUI.Box (new Rect (0, 30, 300.0f, 20.0f), "You're More Polluting Than: " + country);
 			GUI.EndGroup ();
 
-			GUI.BeginGroup (new Rect(Screen.width-300, 5, 300.0f, 50.0f));
+			GUI.BeginGroup (new Rect(Screen.width-205, 5, 300.0f, 50.0f));
 			GUI.Box(new Rect(0 ,0, 200.0f, 20.0f), "Remaining Oil: " + (oil/100.0f));
 			GUI.EndGroup();
 		}
