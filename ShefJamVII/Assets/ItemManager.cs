@@ -8,13 +8,13 @@ public class ItemManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnCollisionEnter(Collision other)
@@ -26,15 +26,15 @@ public class ItemManager : MonoBehaviour
     	}
 
     	if (other.gameObject.tag == "Water"){
-    		// Water effect 
+    		// Water effect
     	}
 
     	if (other.gameObject.tag == "Ice"){
-    		// Ice effect 
+    		// Ice effect
     	}
     	if (other.gameObject.tag == "Fire"){
     		// Fire Effect
-    		eventSystem.GetComponent<ScoreManager>().gameOver = true;
+    		eventSystem.GetComponent<ScoreManager>().endGame();
     	}
     }
 }
