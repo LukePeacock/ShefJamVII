@@ -8,7 +8,6 @@ public class CameraManager : MonoBehaviour
 	private MenuManager menuManager;
 	private ScoreManager scoreManager;
 	private Vector3 offset;
-	
 	public Transform player;
 
 	[Space]
@@ -24,64 +23,43 @@ public class CameraManager : MonoBehaviour
 	public float camRotY;
 
 	[Space]
-	[Range(0, 10f)]
+	[Range(0, 2.0f)]
 	public float CAM_SENS = 0.25f;	// Mouse Sensitivity
 
 	[Range(0, 10f)]
 	public float upDistance = 2.5f;
 
-	//private Vector3 lastMouse = new Vector3(255,255,255); 	// Middle(ish) of screen rather than top corner
+	private Vector3 lastMouse = new Vector3(255,255,255); 	// Middle(ish) of screen rather than top corner
 
     // Start is called before the first frame update
     void Start()
     {
+			// Get score and menu manager components of event system
     	menuManager = eventSystem.GetComponent<MenuManager>();
     	scoreManager = eventSystem.GetComponent<ScoreManager>();
+			// Get initial offset vector
     	offset = new Vector3(player.position.x + camPosX, player.position.y + camPosY, player.position.z + camPosZ);
-       // transform.rotation = Quaternion.Euler(camRotY, camRotY, camRotZ);
+
     }
 
     // Update is called once per frame
     void Update()
     {
+			// if not paused or game over, move camera
     	if (!menuManager.paused && !scoreManager.gameOver)
     	{
-    		offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * CAM_SENS, Vector3.up)* offset; //* Quaternion.AngleAxis(Input.GetAxis("Mouse Y") * CAM_SENS, Vector3.right) * offset;
-    		Vector3 tempPos = transform.position;
+				// Get amount the mouse has moved, and apply to the offset vector
+				lastMouse = Input.mousePosition - lastMouse;
+    		offset = Quaternion.AngleAxis((Vector3.right.x * lastMouse.x) * CAM_SENS, Vector3.up)* offset; //* Quaternion.AngleAxis(Input.GetAxis("Mouse Y") * CAM_SENS, Vector3.right) * offset;
+
+				// Move camera by specified amount
     		transform.position = player.transform.position - offset + new Vector3(0, upDistance, 0);
-    		
+
+				// Look at the player
     		transform.LookAt(player.position);
+				player.transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, transform.eulerAngles.z);
     	}
-   //  	lastMouse = Input.mousePosition - lastMouse;
-       
-
-   //     	//Quaternion rot = transform.rotation;
- 		// //rot.y += Input.mousePosition.y * CAM_SENS * lastMouse.y; //change position, add symbol"+"
-   //      transform.Rotate(Vector3.right.y * lastMouse.y, 0, 0);
-     
-   //   	//rot.y = Mathf.Clamp(rot.y, -20, 20);
-   //      //transform.rotation = rot;
-
-        
- 		
-			
-   // 			//And check for your diapason
-   // 	// 		if (transform.rotation.x > 20) {
-   // 	// 			Debug.Log("x > 20");
- 		// 	// 	rot.x = 20; 
-			// 	// transform.rotation = rot;
-   // 	// 		} else if (transform.rotation.x < -20) {
-   // 	// 			Debug.Log("X < -20");
- 		// 	// 	rot.x = -20; 
-			// 	// transform.rotation = rot;
-   // 	// 		}
-
-   //          // lastMouse = Input.mousePosition - lastMouse;
-   //          // lastMouse = new Vector3(transform.right * - lastMouse * CAM_SENS);
-   //          // //lastMouse = new Vector3(-lastMouse.y * CAM_SENS, lastMouse.x * CAM_SENS, 0);
-   //          // //lastMouse = new Vector3(transform.eulerAngles.x + lastMouse.x, transform.eulerAngles.y + lastMouse.y, 0);
-   //          // transform.eulerAngles = lastMouse;
-   //          lastMouse = Input.mousePosition;
-            //Mouse Camera Angle computed
+			// Store current mouse position
+			lastMouse = Input.mousePosition;
     }
 }

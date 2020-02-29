@@ -6,83 +6,75 @@ public class MovementManager : MonoBehaviour
 {
 	public float jumpHeight = 1.0f;
 	public GameObject camera;
-	
+
 
 	public GameObject eventSystem;
 	private MenuManager menuManager;
+	private ScoreManager scoreManager;
 	float MAIN_SPEED = 10.0f;	// Regular speed
-	
-	
+
+
 	private Vector3 camForward;
 	private Vector3 camRight;
     // Start is called before the first frame update
     void Start()
     {
-        menuManager = eventSystem.GetComponent<MenuManager>(); 
+				// Get score and menu manager components of event system
+				scoreManager = eventSystem.GetComponent<ScoreManager>();
+        menuManager = eventSystem.GetComponent<MenuManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!menuManager.paused) {
+        if (!menuManager.paused && !scoreManager.gameOver) {
 
-        
-
- 			
+					// Get camera forward, remove y axis, and normalise
         	camForward = camera.transform.forward;
         	camForward.y = 0f;
         	camForward.Normalize();
 
-
+					// Get camera right, remove y axis, and normalize
         	camRight = camera.transform.right;
         	camRight.y = 0f;
         	camRight.Normalize();
 
-            //Keyboard Commands
-           //float f = 0.0f;
-            Vector3 p = GetBaseInput();
-            // if (Input.GetKey(KeyCode.LeftShift)){	//Run
-            // 	totalRun += Time.deltaTime;
-            // 	p = p *totalRun * SHIFT_ADD;
-            // 	p.x = Mathf.Clamp(p.x, -MAX_SHIFT, MAX_SHIFT);
-            // 	p.y = Mathf.Clamp(p.y, -MAX_SHIFT, MAX_SHIFT);
-            // 	p.z = Mathf.Clamp(p.z, -MAX_SHIFT, MAX_SHIFT);
-            // }
-            // else{
-            	//totalRun = Mathf.Clamp(totalRun * 0.5f, 1f, 1000f);
-            	p = p * MAIN_SPEED;
-            // }
+          //Keyboard Commands
+          // Rotate player based on camera forward direction to always face away
+					transform.rotation = Quaternion.Euler(0.0f, camera.transform.eulerAngles.y, 0.0f);
 
-            p = p * Time.deltaTime;
-            Vector3 newPosition = transform.position;
-            if (Input.GetKey(KeyCode.LeftShift)){	//Move only on X and Z axis
-            	transform.Translate(p);
-            	newPosition.x = transform.position.x;
-            	newPosition.z = transform.position.z;
-            	transform.position = newPosition;
-            }
-            else {
-            	transform.Translate(p);
-            }
+					// Get user input
+          Vector3 p = GetBaseInput();
 
-            transform.rotation = new Quaternion(0,0,0,0);
+					// Apply main speed and delta time to counter frame rate changes
+					p = p * MAIN_SPEED * Time.deltaTime;
+
+					// Translate
+					transform.position += p;
         }
     }
 
-    // Return basic values. If no input present, return 0
+    // Return basic values. If no input present, return just forward move
+		// @return: vector3 p - direction(s) to move in stored as vector3
     // --------------------------------------------------
     private Vector3 GetBaseInput() {
     	Vector3 p_Velocity = new Vector3();
-    	p_Velocity += camForward;
+
+			// Constant move forwards
+    	p_Velocity += camForward;//transform.forward;
+
+			// If left, add left amount
     	if (Input.GetKey(KeyCode.A)){
-    		p_Velocity += -camRight;
+    		p_Velocity += -camRight;//transform.right;
     	}
+			// If right, add right amount
     	if (Input.GetKey(KeyCode.D)) {
-    		p_Velocity += camRight;
+    		p_Velocity += camRight;//transform.right;
     	}
-       	if (Input.GetKey(KeyCode.Space)){
-       		p_Velocity += new Vector3(0,jumpHeight,0);
-       	}
-       	return p_Velocity;
+			// If space if pressed, add up amount
+      if (Input.GetKey(KeyCode.Space)){
+      	p_Velocity += new Vector3(0,jumpHeight,0);
+      }
+			return p_Velocity;
     }
 }
