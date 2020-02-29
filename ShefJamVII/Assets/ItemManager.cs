@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,6 +23,18 @@ public class ItemManager : MonoBehaviour
     		eventSystem.GetComponent<ScoreManager>().oil = 10000;
     		Debug.Log("Refill");
     		Destroy(other.gameObject);
+    	}
+
+    	if (other.gameObject.tag == "Water"){
+    		// Water effect 
+    	}
+
+    	if (other.gameObject.tag == "Ice"){
+    		// Ice effect 
+    	}
+    	if (other.gameObject.tag == "Fire"){
+    		// Fire Effect
+    		eventSystem.GetComponent<ScoreManager>().gameOver = true;
     	}
     }
 }

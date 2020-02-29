@@ -48,11 +48,13 @@ public class ScoreManager : MonoBehaviour
 	    		oil -= 1;
 	    	else 
 	    	{
-	    		oil = 0;
 	    		gameOver = true;
-	    		CancelInvoke();
-	    		finalScore();
 	    	}
+	    }
+	    if (gameOver){
+	    	oil = 0;
+	    	CancelInvoke();
+	    	finalScore();
 	    }
     }
 
