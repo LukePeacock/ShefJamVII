@@ -23,8 +23,8 @@ public class CameraManager : MonoBehaviour
 	public float camRotY;
 
 	[Space]
-	[Range(0, 2.0f)]
-	public float CAM_SENS = 0.25f;	// Mouse Sensitivity
+	[Range(0, 10.0f)]
+	public float CAM_SENS = 5.0f;	// Mouse Sensitivity
 
 	[Range(0, 10f)]
 	public float upDistance = 2.5f;
@@ -34,6 +34,7 @@ public class CameraManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+			Cursor.lockState = CursorLockMode.Locked;
 			// Get score and menu manager components of event system
     	menuManager = eventSystem.GetComponent<MenuManager>();
     	scoreManager = eventSystem.GetComponent<ScoreManager>();
@@ -54,8 +55,8 @@ public class CameraManager : MonoBehaviour
     	if (!menuManager.paused && !scoreManager.gameOver)
     	{
 				// Get amount the mouse has moved, and apply to the offset vector
-				lastMouse = Input.mousePosition - lastMouse;
-    		offset = Quaternion.AngleAxis((Vector3.right.x * lastMouse.x) * CAM_SENS, Vector3.up)* offset; //* Quaternion.AngleAxis(Input.GetAxis("Mouse Y") * CAM_SENS, Vector3.right) * offset;
+				//lastMouse = Input.mousePosition - lastMouse * Input.GetAxis("Mouse X");
+    		offset = Quaternion.AngleAxis((Vector3.right.x * Input.GetAxis("Mouse X")) * CAM_SENS, Vector3.up)* offset; //* Quaternion.AngleAxis(Input.GetAxis("Mouse Y") * CAM_SENS, Vector3.right) * offset;
 
 				// Move camera by specified amount
     		transform.position = player.transform.position - offset + new Vector3(0, upDistance, 0);
