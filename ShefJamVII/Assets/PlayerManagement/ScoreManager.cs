@@ -79,7 +79,7 @@ public class ScoreManager : MonoBehaviour
 				if (score > 100)
 					difficulty = (score / 20) * 2 ;
 
-					Debug.Log(difficulty);
+					//Debug.Log(difficulty);
 
 				float t = difficulty / 25.0f;
 				tc.PlaceableObjectsChance[0] = Mathf.Lerp(25.0f, 10.0f, t);// tc.PlaceableObjectsChance[0] - (1/(difficulty));
