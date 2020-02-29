@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour
 	public GameObject gameOverScreen;
 	public GameObject finalScoreLabel;
 	public GameObject finalCountryLabel;
-	private bool gameOver = false;
+	public bool gameOver = false;
 	public int score = 0;
 	private int oil = 10000;
 	private Dictionary<int, string> countries = new Dictionary<int, string>(){
@@ -75,6 +75,7 @@ public class ScoreManager : MonoBehaviour
     	finalCountryLabel.GetComponent<Text>().text = country;
     	finalScoreLabel.GetComponent<Text>().text = "You Produced " + score + " million metric tons of pollution";
     	gameOverScreen.SetActive(true);
+    	Time.timeScale = 0.0f;
     }
 
     void OnGUI(){

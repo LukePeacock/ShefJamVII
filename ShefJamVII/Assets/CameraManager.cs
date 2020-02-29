@@ -6,6 +6,7 @@ public class CameraManager : MonoBehaviour
 {
 	public GameObject eventSystem;
 	private MenuManager menuManager;
+	private ScoreManager scoreManager;
 	private Vector3 offset;
 	
 	public Transform player;
@@ -35,6 +36,7 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
     	menuManager = eventSystem.GetComponent<MenuManager>();
+    	scoreManager = eventSystem.GetComponent<ScoreManager>();
     	offset = new Vector3(player.position.x + camPosX, player.position.y + camPosY, player.position.z + camPosZ);
        // transform.rotation = Quaternion.Euler(camRotY, camRotY, camRotZ);
     }
@@ -42,7 +44,7 @@ public class CameraManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    	if (!menuManager.paused)
+    	if (!menuManager.paused && !scoreManager.gameOver)
     	{
     		offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * CAM_SENS, Vector3.up)* offset; //* Quaternion.AngleAxis(Input.GetAxis("Mouse Y") * CAM_SENS, Vector3.right) * offset;
     		Vector3 tempPos = transform.position;
