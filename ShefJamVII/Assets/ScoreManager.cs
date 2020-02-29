@@ -42,15 +42,18 @@ public class ScoreManager : MonoBehaviour
     }
 
     void Update(){
-    	if (oil > 1)
-    		oil -= 1;
-    	else 
+    	if (!pauseMenu.paused)
     	{
-    		oil = 0;
-    		gameOver = true;
-    		CancelInvoke();
-    		finalScore();
-    	}
+	    	if (oil > 1)
+	    		oil -= 1;
+	    	else 
+	    	{
+	    		oil = 0;
+	    		gameOver = true;
+	    		CancelInvoke();
+	    		finalScore();
+	    	}
+	    }
     }
 
     void updateScoreTime(){

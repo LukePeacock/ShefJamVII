@@ -19,25 +19,20 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)){
         	if (paused)
-        	{
         		Resume();
-        		Time.timeScale = defaultTimeScale;
-        	}	
         	else 
-        	{	
         		Pause();
-        		Time.timeScale = 0.0f;
-        	}
         }
     }
 
     public void Resume(){
-       // SetSelectFileMessage("Select Point Cloud File");
+    	Time.timeScale = defaultTimeScale;
     	paused = false;
     	controlMenuUI.SetActive(false);
     }
 
     public void Pause() {
+    	Time.timeScale = 0.0f;
     	controlMenuUI.SetActive(true);
     	paused = true;
     }
@@ -54,8 +49,8 @@ public class MenuManager : MonoBehaviour
     // // 	SelectFileText.text = message;
     // // }
 
-    // public void QuitGame(){
-    // 	Debug.Log("qUITING SOFTWARE");
-    //     Application.Quit();
-    // }
+    public void QuitGame(){
+    	Debug.Log("QUITING SOFTWARE");
+        Application.Quit();
+    }
 }
