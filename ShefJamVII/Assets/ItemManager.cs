@@ -20,7 +20,7 @@ public class ItemManager : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
     	if (other.gameObject.tag == "Oil"){
-    		eventSystem.GetComponent<ScoreManager>().oil = 10000;
+    		eventSystem.GetComponent<ScoreManager>().resetOil();
     		Debug.Log("Refill");
     		Destroy(other.gameObject);
     	}

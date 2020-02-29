@@ -14,7 +14,7 @@ public class ScoreManager : MonoBehaviour
 	private CameraManager cameraManager;
 	public bool gameOver = false;
 	public int score = 0;
-	public int oil = 10000;
+	public int oil;
 	private Dictionary<int, string> countries = new Dictionary<int, string>(){
 				{280, "Poland"},
 				{290, "France"},
@@ -45,10 +45,13 @@ public class ScoreManager : MonoBehaviour
 				defaultTimeScale = Time.timeScale;
 				resetGame();
     }
+		public void resetOil(){
+			oil = 1000;
+		}
 
 		void resetGame(){
 			score = 0;
-			oil = 10000;
+			resetOil();
 			player.transform.position = new Vector3(3,3,3);
 
 			player.transform.rotation = new Quaternion(0,0,0,0);
@@ -110,7 +113,7 @@ public class ScoreManager : MonoBehaviour
 				GUI.EndGroup ();
 
 				GUI.BeginGroup (new Rect(Screen.width-205, 5, 300.0f, 50.0f));
-				GUI.Box(new Rect(0 ,0, 200.0f, 20.0f), "Remaining Oil: " + (oil/100.0f));
+				GUI.Box(new Rect(0 ,0, 200.0f, 20.0f), "Remaining Oil: " + (oil/10.0f));
 				GUI.EndGroup();
 			}
     }
