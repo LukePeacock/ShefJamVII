@@ -39,7 +39,7 @@ public class CameraManager : MonoBehaviour
     	menuManager = eventSystem.GetComponent<MenuManager>();
     	scoreManager = eventSystem.GetComponent<ScoreManager>();
 			// Get initial offset vector
-    	origOffset = new Vector3(player.position.x + camPosX, player.position.y + camPosY, player.position.z + camPosZ);
+    	origOffset = new Vector3(player.position.x + camPosX, player.position.y - upDistance + camPosY, player.position.z + camPosZ);
 			resetCamera();
     }
 

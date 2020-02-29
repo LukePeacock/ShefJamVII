@@ -49,7 +49,8 @@ public class ScoreManager : MonoBehaviour
 		void resetGame(){
 			score = 0;
 			oil = 10000;
-			player.transform.position = new Vector3(3,1,3);
+			player.transform.position = new Vector3(3,3,3);
+
 			player.transform.rotation = new Quaternion(0,0,0,0);
 			gameOver = false;
 			gameOverScreen.SetActive(false);
