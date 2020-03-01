@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
+	private float colorCut=0.0f;
 	public GameObject player;
 	private MenuManager pauseMenu;
 	public GameObject gameOverScreen;
@@ -40,10 +41,14 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-				cameraManager = camera.GetComponent<CameraManager>();
-    		pauseMenu = GetComponent<MenuManager>();
-				defaultTimeScale = Time.timeScale;
-				resetGame();
+		cameraManager = camera.GetComponent<CameraManager>();
+    	pauseMenu = GetComponent<MenuManager>();
+		defaultTimeScale = Time.timeScale;
+		resetGame();
+
+		if (RenderSettings.skybox.HasProperty("_Tint")) {
+			RenderSettings.skybox.SetColor("_Tint", Color.white);
+		}
     }
 		public void resetOil(){
 			oil = 1000;
@@ -80,6 +85,17 @@ public class ScoreManager : MonoBehaviour
 					difficulty = (score / 20) * 2 ;
 
 					//Debug.Log(difficulty);
+
+
+				if (score%100 == 0) {
+					if (colorCut <= 1.0f){
+						if (RenderSettings.skybox.HasProperty("_Tint")) {
+							Debug.Log(colorCut);
+							RenderSettings.skybox.SetColor("_Tint", new Color(1.0f, 1.0f-colorCut, 1.0f-colorCut, 1.0f));
+						}
+						colorCut+=0.005f;
+					}
+				}
 
 				float t = difficulty / 25.0f;
 				tc.PlaceableObjectsChance[0] = Mathf.Lerp(25.0f, 10.0f, t);// tc.PlaceableObjectsChance[0] - (1/(difficulty));
