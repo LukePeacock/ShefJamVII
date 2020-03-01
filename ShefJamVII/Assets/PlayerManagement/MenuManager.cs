@@ -51,6 +51,7 @@ public class MenuManager : MonoBehaviour
     }
 
     public void QuitGame(){
+      Time.timeScale = defaultTimeScale;
     	SceneManager.LoadScene("MainMenu");
     }
 }
