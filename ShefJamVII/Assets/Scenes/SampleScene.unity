@@ -223,7 +223,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c3a11af2601cf4989c2d678c51a8ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTarget: {fileID: 0}
+  mTarget: {fileID: 1840694547}
+--- !u!4 &114630938 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8108570464724026393, guid: e6d2314cd4a59304fa4e35d55b5b59e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 318804058}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &123697605
 GameObject:
   m_ObjectHideFlags: 0
@@ -5870,7 +5876,7 @@ MonoBehaviour:
   radiusToRender: 5
   gameTransforms: []
   playerTransform: {fileID: 1840694547}
-  water: {fileID: 8108570464724026393, guid: e6d2314cd4a59304fa4e35d55b5b59e0, type: 3}
+  water: {fileID: 114630938}
   seed: 0
   placeableObjects:
   - {fileID: 8207961296906792249, guid: d3114e6a359aa704c8c04d89adef6a81, type: 3}
