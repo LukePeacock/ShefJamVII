@@ -134,7 +134,7 @@ public class ScoreManager : MonoBehaviour
 
 			if (player.GetComponent<Animator>().GetBool("GameOver"))
 			{
-			    
+
 			    GetComponent<AudioSource>().Play();
 
 				player.SetActive(false);
@@ -169,6 +169,7 @@ public class ScoreManager : MonoBehaviour
     	finalScoreLabel.GetComponent<Text>().text = "You Produced " + score + " million metric tons of pollution";
     	gameOverScreen.SetActive(true);
     	Time.timeScale = 0.0f;
+			Cursor.lockState = CursorLockMode.None;
     }
 
     void OnGUI(){
