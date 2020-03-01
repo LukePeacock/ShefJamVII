@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
+
 	public GameObject eventSystem;
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,8 @@ public class ItemManager : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
     	if (other.gameObject.tag == "Oil"){
+			GetComponent<AudioSource>().Play();
+
     		eventSystem.GetComponent<ScoreManager>().resetOil();
     		Debug.Log("Refill");
     		Destroy(other.gameObject);
