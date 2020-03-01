@@ -84,8 +84,8 @@ public class ScoreManager : MonoBehaviour
 				float t = difficulty / 25.0f;
 				tc.PlaceableObjectsChance[0] = Mathf.Lerp(25.0f, 10.0f, t);// tc.PlaceableObjectsChance[0] - (1/(difficulty));
 
-				t = difficulty / 300.0f;
-				tc.PlaceableObjectsChance[1] = Mathf.Lerp(20.0f, 300.0f, t);//tc.PlaceableObjectsChance[1] + (1/(difficulty/2));
+				t = difficulty / 100.0f;
+				tc.PlaceableObjectsChance[1] = Mathf.Lerp(20.0f, 100.0f, t);//tc.PlaceableObjectsChance[1] + (1/(difficulty/2));
 
 				t = difficulty / 80.0f;
 				tc.PlaceableObjectsChance[2] = Mathf.Lerp(80.0f, 20.0f, t);//tc.PlaceableObjectsChance[2] + (1/(difficulty/3));
@@ -96,8 +96,8 @@ public class ScoreManager : MonoBehaviour
 				// Mathf.Clamp(tc.PlaceableObjectsChance[2], 10.0f, 200.0f);
 				// Mathf.Clamp(tc.PlaceableObjectsChance[3], 10.0f, 200.0f);
 
-				t = difficulty / 30.0f;
-				tc.maxObjectsPerTile = (int)Mathf.Lerp(5, 30,t);
+				t = difficulty / 40.0f;
+				tc.maxObjectsPerTile = (int)Mathf.Lerp(5, 20,t);
 				// Skybox stuff
 	    }
 	    if (gameOver &&Input.GetKeyDown(KeyCode.Return))
