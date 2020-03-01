@@ -114,10 +114,13 @@ public class ScoreManager : MonoBehaviour
 
 				player.GetComponent<Animator>().SetBool("Death", true);
 				Debug.Log("DIE!");
-			}
+		    }
 
 			if (player.GetComponent<Animator>().GetBool("GameOver"))
 			{
+			    
+			    GetComponent<AudioSource>().Play();
+
 				player.SetActive(false);
 				finalScore();
 				gameOver = true;
