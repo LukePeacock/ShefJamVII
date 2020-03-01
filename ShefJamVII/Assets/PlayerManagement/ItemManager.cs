@@ -21,7 +21,7 @@ public class ItemManager : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
     	if (other.gameObject.tag == "Oil"){
-			GetComponent<AudioSource>().Play();
+			GetComponents<AudioSource>()[0].Play();
 
     		eventSystem.GetComponent<ScoreManager>().resetOil();
     		Debug.Log("Refill");
@@ -32,7 +32,9 @@ public class ItemManager : MonoBehaviour
     		// Water effect
 				GetComponent<MovementManager>().speedPenalty = 0.25f;
 				GetComponent<MovementManager>().jumpHeight = 0.25f;
-    	}
+
+			GetComponents<AudioSource>()[1].Play();
+		}
 
     	if (other.gameObject.tag == "Ice"){
     		// Ice effect
@@ -47,6 +49,7 @@ public class ItemManager : MonoBehaviour
 			if (other.gameObject.tag == "Water"){
 				GetComponent<MovementManager>().speedPenalty = 1.0f;
 				GetComponent<MovementManager>().jumpHeight = 0.5f;
+                GetComponents<AudioSource>()[1].Pause();
 			}
 		}
 }
