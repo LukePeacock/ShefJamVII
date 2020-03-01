@@ -5169,6 +5169,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8108570464724026388, guid: e6d2314cd4a59304fa4e35d55b5b59e0,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 8108570464724026389, guid: e6d2314cd4a59304fa4e35d55b5b59e0,
         type: 3}
       propertyPath: m_Name
@@ -5249,6 +5254,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 8108570464724026394, guid: e6d2314cd4a59304fa4e35d55b5b59e0,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 8108570464724026395, guid: e6d2314cd4a59304fa4e35d55b5b59e0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de0ac95853019d147856ecf20edbeef9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6d2314cd4a59304fa4e35d55b5b59e0, type: 3}
 --- !u!1 &484806805
