@@ -71,14 +71,16 @@ public class ScoreManager : MonoBehaviour
 		}
 
     void Update(){
-    	if (!pauseMenu.paused)
+		if (!pauseMenu.paused)
     	{
-	    	if (oil > 2)
-	    		oil -= 2;
-	    	else
-	    	{
-					endGame();
-	    	}
+			if (oil > 2)
+			{
+				oil -= (int)(200 * Time.deltaTime);
+			}
+			else
+			{
+				endGame();
+			}
 				TerrainController tc = GetComponent<TerrainController>();
 				int difficulty = 1;
 				if (score > 100)
@@ -190,6 +192,4 @@ public class ScoreManager : MonoBehaviour
          return player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length >
                 player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
     }
-
-
 }
