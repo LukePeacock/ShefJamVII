@@ -15,7 +15,7 @@ public class ScoreManager : MonoBehaviour
 	private CameraManager cameraManager;
 	public bool gameOver = false;
 	public int score = 0;
-	public int oil;
+	public float oil;
 	private Dictionary<int, string> countries = new Dictionary<int, string>(){
 				{280, "Poland"},
 				{290, "France"},
@@ -75,7 +75,7 @@ public class ScoreManager : MonoBehaviour
     	{
 			if (oil > 2)
 			{
-				oil -= (int)(200 * Time.deltaTime);
+				oil -= (100 * Time.deltaTime);
 			}
 			else
 			{
