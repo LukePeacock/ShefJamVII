@@ -15,7 +15,7 @@ public class ScoreManager : MonoBehaviour
 	private CameraManager cameraManager;
 	public bool gameOver = false;
 	public int score = 0;
-	public int oil;
+	public float oil;
 	private Dictionary<int, string> countries = new Dictionary<int, string>(){
 				{280, "Poland"},
 				{290, "France"},
@@ -71,14 +71,16 @@ public class ScoreManager : MonoBehaviour
 		}
 
     void Update(){
-    	if (!pauseMenu.paused)
+		if (!pauseMenu.paused)
     	{
-	    	if (oil > 2)
-	    		oil -= 2;
-	    	else
-	    	{
-					endGame();
-	    	}
+			if (oil > 2)
+			{
+				oil -= (100 * Time.deltaTime);
+			}
+			else
+			{
+				endGame();
+			}
 				TerrainController tc = GetComponent<TerrainController>();
 				int difficulty = 1;
 				if (score > 100)
@@ -190,6 +192,4 @@ public class ScoreManager : MonoBehaviour
          return player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length >
                 player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
     }
-
-
 }
